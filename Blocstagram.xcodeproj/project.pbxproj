@@ -11,6 +11,7 @@
 		1775D74119ADE8C2008FA60F /* BLCMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 1775D74019ADE8C2008FA60F /* BLCMedia.m */; };
 		1775D74419ADE8DF008FA60F /* BLCDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1775D74319ADE8DF008FA60F /* BLCDataSource.m */; };
 		1775D74719ADE9FF008FA60F /* BLCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1775D74619ADE9FF008FA60F /* BLCComment.m */; };
+		177D74A419AE78D4007131D5 /* BLCMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */; };
 		17DC50BE19A7D44F00CE33FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BD19A7D44F00CE33FB /* Foundation.framework */; };
 		17DC50C019A7D44F00CE33FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BF19A7D44F00CE33FB /* CoreGraphics.framework */; };
 		17DC50C219A7D44F00CE33FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50C119A7D44F00CE33FB /* UIKit.framework */; };
@@ -55,6 +56,8 @@
 		1775D74319ADE8DF008FA60F /* BLCDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCDataSource.m; sourceTree = "<group>"; };
 		1775D74519ADE9FF008FA60F /* BLCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCComment.h; sourceTree = "<group>"; };
 		1775D74619ADE9FF008FA60F /* BLCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCComment.m; sourceTree = "<group>"; };
+		177D74A219AE78D4007131D5 /* BLCMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMediaTableViewCell.h; sourceTree = "<group>"; };
+		177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaTableViewCell.m; sourceTree = "<group>"; };
 		17DC50BA19A7D44F00CE33FB /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DC50BD19A7D44F00CE33FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		17DC50BF19A7D44F00CE33FB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -147,6 +150,8 @@
 				17DC50CD19A7D44F00CE33FB /* BLCAppDelegate.m */,
 				17DC510119A7E5FF00CE33FB /* BLCImagesTableViewController.h */,
 				17DC510219A7E5FF00CE33FB /* BLCImagesTableViewController.m */,
+				177D74A219AE78D4007131D5 /* BLCMediaTableViewCell.h */,
+				177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */,
 				1775D73C19ACEDC7008FA60F /* BLCUser.h */,
 				1775D73F19ADE8C2008FA60F /* BLCMedia.h */,
 				1775D74019ADE8C2008FA60F /* BLCMedia.m */,
@@ -319,6 +324,7 @@
 				17DC50CA19A7D44F00CE33FB /* main.m in Sources */,
 				17DC510319A7E5FF00CE33FB /* BLCImagesTableViewController.m in Sources */,
 				1775D74119ADE8C2008FA60F /* BLCMedia.m in Sources */,
+				177D74A419AE78D4007131D5 /* BLCMediaTableViewCell.m in Sources */,
 				1775D74719ADE9FF008FA60F /* BLCComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

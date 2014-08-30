@@ -11,9 +11,12 @@
 #import "BLCMedia.h"
 #import "BLCUser.h"
 #import "BLCComment.h"
+#import "BLCMediaTableViewCell.h"
 
 
 @interface BLCImagesTableViewController ()
+
+
 
 @end
 
@@ -28,11 +31,17 @@
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier:@"imageCell"];
+    [self.tableView registerClass:[BLCMediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
     
 }
 
@@ -44,8 +53,7 @@
 
 - (NSMutableArray *) items
 {
-    NSArray *items = [BLCDataSource sharedInstance].mediaItems;
-    return [NSMutableArray arrayWithArray:items];
+    return [BLCDataSource sharedInstance].mediaItems;;
 }
 
 #pragma mark - Table view data source
@@ -59,26 +67,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell" forIndexPath:indexPath];
- 
-    // Configure the cell...
-    static NSInteger imageViewTag = 1234;
-    UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:imageViewTag];
     
-    if (!imageView) {
-        //This is a new cell, it doesn't have an image view yet
-        imageView = [[UIImageView alloc]init];
-        imageView.contentMode = UIViewContentModeScaleToFill;
-        
-        imageView.frame = cell.contentView.bounds;
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        
-        imageView.tag = imageViewTag;
-        [cell.contentView addSubview:imageView];
-    }
-    
-    BLCMedia *item = [self items][indexPath.row];
-    imageView.image = item.image;
+    BLCMediaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
+    cell.mediaItem = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
     
     return cell;
 }
@@ -86,35 +77,41 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     BLCMedia *item = [self items][indexPath.row];
-    UIImage *image = item.image;
-    return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height;
+    return [BLCMediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
 }
+
+
+
 
 
 
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
- 
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
 
-
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    // If row is deleted, remove it from the list.
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        
-        
         
         [[self items] removeObjectAtIndex:indexPath.row];
-         
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        
     }
 }
+
+
+
+
+/*
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+} */
+
+
 
 
 /*
