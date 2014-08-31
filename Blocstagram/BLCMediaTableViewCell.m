@@ -145,6 +145,8 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) layoutSubviews {
     [super layoutSubviews];
+    
+    if (!self.mediaItem) return;
    
     CGSize maxSize = CGSizeMake(CGRectGetWidth(self.bounds), CGFLOAT_MAX);
     CGSize usernameLabelSize = [self.usernameAndCaptionLabel sizeThatFits:maxSize];
