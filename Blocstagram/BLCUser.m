@@ -8,6 +8,6 @@
 
 #import "BLCUser.h"
 
-@implementation BLCUser ()
+@implementation BLCUser 
 
 @end
