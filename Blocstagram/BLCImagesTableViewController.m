@@ -147,7 +147,7 @@
                    width:CGRectGetWidth(self.view.frame)];
 }
 
-// Override to support conditional editing of the table view.
+
 
 - (void)tableView:(UITableView *)tableView
     commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
