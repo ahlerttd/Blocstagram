@@ -20,5 +20,6 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
  - (void) deleteMediaItem:(BLCMedia *)item;
 
 - (void) requestNewItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
+- (void) requestOldItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
 
 @end
