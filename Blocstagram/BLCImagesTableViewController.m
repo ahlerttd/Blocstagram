@@ -39,6 +39,9 @@
                                    forKeyPath:@"mediaItems"
                                       options:0
                                       context:nil];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
 
   [self.tableView registerClass:[BLCMediaTableViewCell class]
          forCellReuseIdentifier:@"mediaCell"];
@@ -51,6 +54,12 @@
 
 - (void)dealloc {
   [[BLCDataSource sharedInstance] removeObserver:self forKeyPath:@"mediaItems"];
+}
+
+- (void) refreshControlDidFire:(UIRefreshControl *) sender {
+    [[BLCDataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+        [sender endRefreshing];
+    }];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -138,7 +147,7 @@
                    width:CGRectGetWidth(self.view.frame)];
 }
 
-// Override to support conditional editing of the table view.
+
 
 - (void)tableView:(UITableView *)tableView
     commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -148,6 +157,21 @@
     BLCMedia *item = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
     [[BLCDataSource sharedInstance] deleteMediaItem:item];
   }
+}
+
+- (void) infiniteScrollIfNecessary {
+    NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];
+    
+    if (bottomIndexPath && bottomIndexPath.row == [BLCDataSource sharedInstance].mediaItems.count - 1) {
+        // The very last cell is on screen
+        [[BLCDataSource sharedInstance] requestOldItemsWithCompletionHandler:nil];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self infiniteScrollIfNecessary];
 }
 
 @end
