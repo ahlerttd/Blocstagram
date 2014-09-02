@@ -31,11 +31,11 @@ static UIColor *commentLabelGray;
 static UIColor *linkColor;
 static NSParagraphStyle *paragraphStyle;
 
-
 #define LAYOUT_NORMAL 0
 #define LAYOUT_HORIZONTAL 1
+#define LAYOUT_MAGAZINE 2
 
-#define LAYOUT_OPTION LAYOUT_HORIZONTAL
+#define LAYOUT_OPTION LAYOUT_MAGAZINE
 
 @implementation BLCMediaTableViewCell
 
@@ -69,7 +69,8 @@ static NSParagraphStyle *paragraphStyle;
     self.commentLabel.adjustsFontSizeToFitWidth = YES;
     [self.commentLabel
         setContentCompressionResistancePriority:UILayoutPriorityDefaultLow
-                                        forAxis:UILayoutConstraintAxisHorizontal];
+                                        forAxis:
+                                            UILayoutConstraintAxisHorizontal];
 
     for (UIView *view in @[
            self.mediaImageView,
@@ -83,29 +84,35 @@ static NSParagraphStyle *paragraphStyle;
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(
         _mediaImageView, _usernameAndCaptionLabel, _commentLabel);
 
-    ///[self.contentView addConstraints:[NSLayoutConstraint
-    /// constraintsWithVisualFormat:@"H:|[_mediaImageView](10)|"
-    /// options:kNilOptions metrics:nil views:viewDictionary]];/
-    ///[self.contentView addConstraints:[NSLayoutConstraint
-    /// constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|"
-    /// options:kNilOptions metrics:nil views:viewDictionary]];
-    /// [self.contentView addConstraints:[NSLayoutConstraint
-    /// constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions
-    /// metrics:nil views:viewDictionary]];
+   /* [self.contentView
+        addConstraints:[NSLayoutConstraint
+                           constraintsWithVisualFormat:@"V:|[_mediaImageView]-["
+                                                       @"_usernameAndCaptionLa"
+                                                       @"bel]-[_"
+                                                       @"commentLabel]|"
+                                               options:kNilOptions
+                                               metrics:nil
+                                                 views:viewDictionary]]; */
 
     [self.contentView
         addConstraints:[NSLayoutConstraint
-                           constraintsWithVisualFormat:@"V:|[_mediaImageView]-[_usernameAndCaptionLabel(10)]-[_commentLabel]|"
+                           constraintsWithVisualFormat:@"H:|[_mediaImageView]|"
                                                options:kNilOptions
                                                metrics:nil
                                                  views:viewDictionary]];
-      
-      [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-      [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
-      [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
-      
-      
-      
+    [self.contentView
+        addConstraints:
+            [NSLayoutConstraint
+                constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|"
+                                    options:kNilOptions
+                                    metrics:nil
+                                      views:viewDictionary]];
+    [self.contentView
+        addConstraints:[NSLayoutConstraint
+                           constraintsWithVisualFormat:@"H:|[_commentLabel]|"
+                                               options:kNilOptions
+                                               metrics:nil
+                                                 views:viewDictionary]];
 
     [self.contentView addConstraint:[NSLayoutConstraint
                                         constraintWithItem:self.mediaImageView
@@ -118,7 +125,7 @@ static NSParagraphStyle *paragraphStyle;
 
     [self.contentView
         addConstraint:[NSLayoutConstraint
-                          constraintWithItem:_usernameAndCaptionLabel
+                          constraintWithItem:self.usernameAndCaptionLabel
                                    attribute:NSLayoutAttributeTop
                                    relatedBy:NSLayoutRelationEqual
                                       toItem:_mediaImageView
@@ -126,25 +133,16 @@ static NSParagraphStyle *paragraphStyle;
                                   multiplier:1.0
                                     constant:0]];
 
+
     [self.contentView
         addConstraint:[NSLayoutConstraint
-                          constraintWithItem:_commentLabel
-                                   attribute:NSLayoutAttributeBottom
-                                   relatedBy:NSLayoutRelationEqual
-                                      toItem:_usernameAndCaptionLabel
+                          constraintWithItem:self.commentLabel
                                    attribute:NSLayoutAttributeTop
+                                   relatedBy:NSLayoutRelationEqual
+                                      toItem:self.usernameAndCaptionLabel
+                                   attribute:NSLayoutAttributeBottom
                                   multiplier:1.0
                                     constant:0]];
-      
-      [self.contentView
-       addConstraint:[NSLayoutConstraint
-                      constraintWithItem:_commentLabel
-                      attribute:NSLayoutAttributeBottom
-                      relatedBy:NSLayoutRelationEqual
-                      toItem:self.mediaImageView
-                      attribute:NSLayoutAttributeBottom
-                      multiplier:1.0
-                      constant:0]];
 
     self.imageHeightConstraint =
         [NSLayoutConstraint constraintWithItem:_mediaImageView
@@ -154,7 +152,7 @@ static NSParagraphStyle *paragraphStyle;
                                      attribute:NSLayoutAttributeNotAnAttribute
                                     multiplier:1
                                       constant:100];
-
+      self.imageHeightConstraint.priority = 1000;
 
     self.usernameAndCaptionLabelHeightConstraint =
         [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel
@@ -164,6 +162,7 @@ static NSParagraphStyle *paragraphStyle;
                                      attribute:NSLayoutAttributeNotAnAttribute
                                     multiplier:1
                                       constant:100];
+      
 
     self.commentLabelHeightConstraint =
         [NSLayoutConstraint constraintWithItem:_commentLabel
@@ -173,6 +172,7 @@ static NSParagraphStyle *paragraphStyle;
                                      attribute:NSLayoutAttributeNotAnAttribute
                                     multiplier:1
                                       constant:100];
+      
 
     [self.contentView
         addConstraints:@[
@@ -257,6 +257,7 @@ static NSParagraphStyle *paragraphStyle;
   CGSize usernameLabelSize =
       [self.usernameAndCaptionLabel sizeThatFits:maxSize];
   CGSize commentLabelSize = [self.commentLabel sizeThatFits:maxSize];
+    
 
   self.usernameAndCaptionLabelHeightConstraint.constant =
       usernameLabelSize.height + 20;
@@ -267,7 +268,19 @@ static NSParagraphStyle *paragraphStyle;
       self.mediaImageView.bounds.size.height;
   self.commentLabelHeightConstraint.constant =
       self.mediaImageView.bounds.size.height;
+    
+#elif(LAYOUT_OPTION == LAYOUT_MAGAZINE)
+    CGSize maxSize = CGSizeMake(CGRectGetWidth(self.bounds), CGFLOAT_MAX);
+    CGSize usernameLabelSize =
+    [self.usernameAndCaptionLabel sizeThatFits:maxSize];
+    CGSize commentLabelSize = [self.commentLabel sizeThatFits:maxSize];
+    
+    self.usernameAndCaptionLabelHeightConstraint.constant =
+    usernameLabelSize.height + 20;
+    self.commentLabelHeightConstraint.constant = commentLabelSize.height + 20;
 #endif
+    
+    
 
   // Hide the line between cells
   self.separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds));
@@ -279,8 +292,11 @@ static NSParagraphStyle *paragraphStyle;
   self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
   self.commentLabel.attributedText = [self commentString];
 
-  self.imageHeightConstraint.constant =
-      self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+  self.imageHeightConstraint.constant = self.mediaItem.image.size.height /
+                                        self.mediaItem.image.size.width *
+                                        CGRectGetWidth(self.contentView.bounds);
+    
+    
 
   [self setNeedsLayout];
   [self layoutIfNeeded];
@@ -302,6 +318,8 @@ static NSParagraphStyle *paragraphStyle;
   return CGRectGetMaxY(layoutCell.commentLabel.frame);
 #elif(LAYOUT_OPTION == LAYOUT_HORIZONTAL)
   return CGRectGetMaxY(layoutCell.mediaImageView.frame);
+#elif(LAYOUT_OPTION == LAYOUT_MAGAZINE)
+    return CGRectGetMaxY(layoutCell.mediaImageView.frame);
 #endif
 }
 
