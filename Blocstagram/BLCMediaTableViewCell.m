@@ -12,7 +12,7 @@
 #import "BLCUser.h"
 #import "BLCDataSource.h"
 
-@interface BLCMediaTableViewCell ()
+@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIImageView *mediaImageView;
 @property (nonatomic, strong) UILabel *usernameAndCaptionLabel;
 @property (nonatomic, strong) UILabel *commentLabel;
@@ -20,6 +20,9 @@
 @property (nonatomic, strong) NSLayoutConstraint *imageHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *usernameAndCaptionLabelHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *commentLabelHeightConstraint;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 
 @end
 
@@ -55,6 +58,16 @@ static NSParagraphStyle *paragraphStyle;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.mediaImageView = [[UIImageView alloc] init];
+        self.mediaImageView.userInteractionEnabled = YES;
+        
+        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
+        self.tapGestureRecognizer.delegate = self;
+        [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
+        
+        self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressFired:)];
+        self.longPressGestureRecognizer.delegate = self;
+        [self.mediaImageView addGestureRecognizer:self.longPressGestureRecognizer];
+        
         self.usernameAndCaptionLabel = [[UILabel alloc]init];
         self.commentLabel = [[UILabel alloc]init];
         self.commentLabel.numberOfLines = 0;
@@ -156,6 +169,14 @@ static NSParagraphStyle *paragraphStyle;
     self.usernameAndCaptionLabelHeightConstraint.constant = usernameLabelSize.height + 20;
     self.commentLabelHeightConstraint.constant = commentLabelSize.height + 20;
     
+    
+    if (_mediaItem.image) {
+        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+    } else {
+        self.imageHeightConstraint.constant = 0;
+    }
+
+    
     // Hide the line between cells
     self.separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds));
 }
@@ -165,13 +186,7 @@ static NSParagraphStyle *paragraphStyle;
     self.mediaImageView.image = _mediaItem.image;
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
     self.commentLabel.attributedText = [self commentString];
-    
-    if (_mediaItem.image) {
-        self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
-    } else {
-        self.imageHeightConstraint.constant = 0;
-    }
-}
+ }
 
 + (CGFloat) heightForMediaItem:(BLCMedia *)mediaItem width:(CGFloat)width {
     // Make a cell
@@ -204,6 +219,25 @@ static NSParagraphStyle *paragraphStyle;
     } else {
         return 150;
     }
+}
+
+#pragma mark - Image View
+
+- (void) tapFired:(UITapGestureRecognizer *)sender {
+    [self.delegate cell:self didTapImageView:self.mediaImageView];
+}
+
+- (void) longPressFired:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self.delegate cell:self didLongPressImageView:self.mediaImageView];
+    }
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return self.isEditing == NO;
 }
 
 @end
