@@ -43,6 +43,9 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
 
+    
+
+    
   [self.tableView registerClass:[BLCMediaTableViewCell class]
          forCellReuseIdentifier:@"mediaCell"];
 }
@@ -61,6 +64,12 @@
         [sender endRefreshing];
     }];
 }
+
+- (void) refreshTable {
+    [BLCDataSource sharedInstance];
+    
+}
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
