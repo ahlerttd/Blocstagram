@@ -219,6 +219,13 @@
 }
 
 
+- (void) cell:(BLCMediaTableViewCell *)cell didTwoTapImageView:(UIImageView *)imageView {
+   
+    [[BLCDataSource sharedInstance] downloadImageForMediaItem:cell.mediaItem];
+}
+
+
+
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
