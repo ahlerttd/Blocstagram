@@ -52,6 +52,9 @@
     
   [self.tableView registerClass:[BLCMediaTableViewCell class]
          forCellReuseIdentifier:@"mediaCell"];
+    
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,6 +156,16 @@
   return cell;
 }
 
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!tableView.dragging) {
+        BLCMedia *mediaItem = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
+        if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
+            [[BLCDataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        }
+    }
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView
     heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   BLCMedia *item = [self items][indexPath.row];
@@ -187,6 +200,32 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self infiniteScrollIfNecessary];
 }
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (scrollView.dragging){
+        NSArray *index = [self.tableView indexPathsForVisibleRows];
+        for (NSIndexPath *indexPath in index) {
+            BLCMedia *mediaItem = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
+            if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
+                [[BLCDataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+            }
+        }
+    }
+    
+}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    
+    NSArray *index = [self.tableView indexPathsForVisibleRows];
+    for (NSIndexPath *indexPath in index) {
+        BLCMedia *mediaItem = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
+        if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
+            [[BLCDataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        }
+    }
+}
+
 
 #pragma mark - BLCMediaTableViewCellDelegate
 
