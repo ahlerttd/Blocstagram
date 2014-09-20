@@ -283,6 +283,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Trevor Ahlert";
 				TargetAttributes = {
+					17DC50B919A7D44F00CE33FB = {
+						DevelopmentTeam = CGSP7Q25C2;
+					};
 					17DC50D419A7D44F00CE33FB = {
 						TestTargetID = 17DC50B919A7D44F00CE33FB;
 					};

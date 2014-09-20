@@ -100,7 +100,7 @@ static NSParagraphStyle *paragraphStyle;
                                                                      toItem:nil
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1
-                                                                   constant:100];
+                                                                   constant:300];
         
         
         self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel
@@ -178,8 +178,10 @@ static NSParagraphStyle *paragraphStyle;
     
     if (_mediaItem.image) {
         self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
+        
+        
     } else {
-        self.imageHeightConstraint.constant = 0;
+        self.imageHeightConstraint.constant = 320;
     }
 
     
@@ -198,8 +200,10 @@ static NSParagraphStyle *paragraphStyle;
     // Make a cell
     BLCMediaTableViewCell *layoutCell = [[BLCMediaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"layoutCell"];
     
+    
     layoutCell.mediaItem = mediaItem;
     layoutCell.frame = CGRectMake(0, 0, width, CGRectGetHeight(layoutCell.frame));
+    
     
     [layoutCell setNeedsLayout];
     [layoutCell layoutIfNeeded];
