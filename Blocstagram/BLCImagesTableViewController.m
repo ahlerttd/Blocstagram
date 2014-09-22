@@ -195,6 +195,12 @@
     }
 }
 
+
+- (void) cellDidPressLikeButton:(BLCMediaTableViewCell *)cell {
+    [[BLCDataSource sharedInstance] toggleLikeOnMediaItem:cell.mediaItem];
+}
+
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

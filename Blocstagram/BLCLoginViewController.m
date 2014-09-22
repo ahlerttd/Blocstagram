@@ -46,11 +46,9 @@ NSString *const BLCLoginViewControllerDidGetAccessTokenNotification =
   [super viewDidLoad];
   // Do any additional setup after loading the view.
 
-  NSString *urlString = [NSString
-      stringWithFormat:@"https://instagram.com/oauth/authorize/"
-                       @"?client_id=%@&redirect_uri=%@&response_type=token",
-                       [BLCDataSource instagramClientID], [self redirectURI]];
-  NSURL *url = [NSURL URLWithString:urlString];
+   NSString *urlString = [NSString stringWithFormat:@"https://instagram.com/oauth/authorize/?client_id=%@&scope=likes+comments+relationships&redirect_uri=%@&response_type=token", [BLCDataSource instagramClientID], [self redirectURI]];
+    
+   NSURL *url = [NSURL URLWithString:urlString];
 
   if (url) {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
