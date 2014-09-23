@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, BLCMediaDownloadState) {
 @property (nonatomic, strong) NSArray *comments;
 @property (nonatomic, assign) BLCMediaDownloadState downloadState;
 @property (nonatomic, assign) BLCLikeState likeState;
+@property (nonatomic, assign) NSInteger likeNumber;
 
 
 

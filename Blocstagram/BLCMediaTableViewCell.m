@@ -30,6 +30,10 @@
 @property (nonatomic, strong) BLCLikeButton *likeButton;
 @property (nonatomic, strong) UILabel *likeLabel;
 
+@property (nonatomic, assign) NSInteger *countValue;
+
+
+
 @end
 
 static UIFont *lightFont;
@@ -91,6 +95,7 @@ static NSParagraphStyle *paragraphStyle;
         
         self.likeLabel = [[UILabel alloc] init];
         self.likeLabel.numberOfLines = 0;
+       
         
         
         
@@ -228,7 +233,6 @@ static NSParagraphStyle *paragraphStyle;
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
     self.commentLabel.attributedText = [self commentString];
     self.likeButton.likeButtonState = mediaItem.likeState;
-    NSLog(@"%@", mediaItem.likeCount);
     self.likeLabel.attributedText = [self likeString];
     
  }
@@ -296,6 +300,9 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) likePressed:(UIButton *)sender {
     [self.delegate cellDidPressLikeButton:self];
+    
+    
+    
 }
 
 
