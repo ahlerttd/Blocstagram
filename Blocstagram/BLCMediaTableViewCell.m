@@ -95,7 +95,7 @@ static NSParagraphStyle *paragraphStyle;
         
         self.likeLabel = [[UILabel alloc] init];
         self.likeLabel.numberOfLines = 0;
-       
+        
         
         
         
@@ -168,7 +168,7 @@ static NSParagraphStyle *paragraphStyle;
     CGFloat usernameFontSize = 10;
     
     // Make a string that says "username caption text"
-    NSString *baseString = [NSString stringWithFormat:@"%@", self.mediaItem.likeCount];
+    NSString *baseString = [NSString stringWithFormat:@"%li", self.mediaItem.likeNumber];
     
     // Make an attributed string, with the "username" bold
     NSMutableAttributedString *mutableLikeString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : [lightFont fontWithSize:usernameFontSize], NSParagraphStyleAttributeName : paragraphStyle}];
@@ -177,6 +177,9 @@ static NSParagraphStyle *paragraphStyle;
     return mutableLikeString;
     
 }
+ 
+
+
 
 - (NSAttributedString *) commentString {
     NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] init];
@@ -300,6 +303,19 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) likePressed:(UIButton *)sender {
     [self.delegate cellDidPressLikeButton:self];
+    
+    if (self.mediaItem.likeState == BLCLikeStateLiking) {
+    
+    self.mediaItem.likeNumber ++;
+        
+    } else if (self.mediaItem.likeState == BLCLikeStateUnliking){
+        
+        self.mediaItem.likeNumber --;
+        
+    }
+    
+    
+    
     
     
     

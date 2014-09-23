@@ -24,7 +24,7 @@
         NSString *countString = mediaDictionary[@"likes"][@"count"];
         self.likeCount = countString;
         self.likeNumber = [self.likeCount integerValue];
-        NSLog(@"Integer %li", self.likeNumber);
+        
         
         
         if (standardResolutionImageURL) {
