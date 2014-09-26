@@ -18,7 +18,7 @@
 
 @end
 
-@interface BLCComposeCommentView : UILabel
+@interface BLCComposeCommentView : UIView
 
 @property (nonatomic, weak) NSObject <BLCComposeCommentViewDelegate> *delegate;
 
