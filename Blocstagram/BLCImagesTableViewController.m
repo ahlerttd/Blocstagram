@@ -18,6 +18,8 @@
 @interface BLCImagesTableViewController () <BLCMediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
+@property (nonatomic, weak) UIView *lastSelectedCommentView;
+@property (nonatomic, assign) CGFloat lastKeyboardAdjustment;
 
 @end
 
@@ -53,8 +55,25 @@
   [self.tableView registerClass:[BLCMediaTableViewCell class]
          forCellReuseIdentifier:@"mediaCell"];
     
-   
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +83,7 @@
 
 - (void)dealloc {
   [[BLCDataSource sharedInstance] removeObserver:self forKeyPath:@"mediaItems"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) refreshControlDidFire:(UIRefreshControl *) sender {
@@ -77,6 +97,16 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
+    }
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    
+}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
@@ -138,6 +168,17 @@
   ;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BLCMedia *item = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
+    if (item.image) {
+        
+        return 450;
+    } else {
+        
+        return 250;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -154,6 +195,11 @@
     cell.mediaItem = [BLCDataSource sharedInstance].mediaItems[indexPath.row];
 
   return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BLCMediaTableViewCell *cell = (BLCMediaTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell stopComposingComment];
 }
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -269,6 +315,13 @@
     [[BLCDataSource sharedInstance] downloadImageForMediaItem:cell.mediaItem];
 }
 
+- (void) cellWillStartComposingComment:(BLCMediaTableViewCell *)cell {
+    self.lastSelectedCommentView = (UIView *)cell.commentView;
+}
+
+- (void) cell:(BLCMediaTableViewCell *)cell didComposeComment:(NSString *)comment {
+    [[BLCDataSource sharedInstance] commentOnMediaItem:cell.mediaItem withCommentText:comment];
+}
 
 
 #pragma mark - UIViewControllerTransitioningDelegate
@@ -287,6 +340,105 @@
     BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
     animator.cellImageView = self.lastTappedImageView;
     return animator;
+}
+
+#pragma mark - Keyboard Handling
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    // Get the frame of the keyboard within self.view's coordinate system
+    NSValue *frameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrameInScreenCoordinates = frameValue.CGRectValue;
+    CGRect keyboardFrameInViewCoordinates = [self.navigationController.view convertRect:keyboardFrameInScreenCoordinates fromView:nil];
+    
+    // Get the frame of the comment view in the same coordinate system
+    CGRect commentViewFrameInViewCoordinates = [self.navigationController.view convertRect:self.lastSelectedCommentView.bounds fromView:self.lastSelectedCommentView];
+    
+    CGPoint contentOffset = self.tableView.contentOffset;
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    UIEdgeInsets scrollIndicatorInsets = self.tableView.scrollIndicatorInsets;
+    CGFloat heightToScroll = 0;
+    
+    CGFloat keyboardY = CGRectGetMinY(keyboardFrameInViewCoordinates);
+    CGFloat commentViewY = CGRectGetMinY(commentViewFrameInViewCoordinates);
+    CGFloat difference = commentViewY - keyboardY;
+    
+    NSLog(@"Difference %2F", difference);
+    
+    if (difference > 0) {
+        heightToScroll += difference;
+        
+    }
+    
+
+    
+    if (CGRectIntersectsRect(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates)) {
+        // The two frames intersect (the keyboard would block the view)
+        CGRect intersectionRect = CGRectIntersection(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates);
+        heightToScroll += CGRectGetHeight(intersectionRect);
+        ///CGFloat commentViewHeight = CGRectGetHeight(commentViewFrameInViewCoordinates);
+        ///NSLog(@"CommentViewHeight: %2F", commentViewHeight);
+        NSLog(@"HeightToScroll %2F", heightToScroll);
+    }
+    
+    if (heightToScroll > 0) {
+        NSLog(@"Show Keyboard ContentInsets.bottom %2F", contentInsets.bottom);
+       
+        contentInsets.bottom += heightToScroll;
+        scrollIndicatorInsets.bottom += heightToScroll;
+        contentOffset.y += heightToScroll;
+        
+        NSLog(@"Show Keyboard Add HeightToScroll ContentInsets.bottom %2F", contentInsets.bottom);
+        
+        NSNumber *durationNumber = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+        NSNumber *curveNumber = notification.userInfo[UIKeyboardAnimationCurveUserInfoKey];
+        
+        NSTimeInterval duration = durationNumber.doubleValue;
+        UIViewAnimationCurve curve = curveNumber.unsignedIntegerValue;
+        UIViewAnimationOptions options = curve << 16;
+        
+        [UIView animateWithDuration:duration delay:0 options:options animations:^{
+            self.tableView.contentInset = contentInsets;
+            self.tableView.scrollIndicatorInsets = scrollIndicatorInsets;
+            self.tableView.contentOffset = contentOffset;
+        } completion:nil];
+    }
+    
+    self.lastKeyboardAdjustment = heightToScroll;
+    NSLog(@"Last Keyboard Adjust %2F", self.lastKeyboardAdjustment);
+}
+
+
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    
+    UIEdgeInsets contentInsets = self.tableView.contentInset;
+    NSLog(@"Hide Keyboard Content Inset Bottom %2F", contentInsets.bottom);
+    contentInsets.bottom -= self.lastKeyboardAdjustment;
+    NSLog(@"Hide Keyboard contentInsetBottom After lastKeyboardAdjustment %2F", contentInsets.bottom);
+    ///NSLog(@"Last Keyboard Adjustment: %2F", self.lastKeyboardAdjustment);
+    
+    UIEdgeInsets scrollIndicatorInsets = self.tableView.scrollIndicatorInsets;
+    scrollIndicatorInsets.bottom -= self.lastKeyboardAdjustment;
+    
+    NSNumber *durationNumber = notification.userInfo[UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curveNumber = notification.userInfo[UIKeyboardAnimationCurveUserInfoKey];
+    
+    NSTimeInterval duration = durationNumber.doubleValue;
+    UIViewAnimationCurve curve = curveNumber.unsignedIntegerValue;
+    UIViewAnimationOptions options = curve << 16;
+    
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+        self.tableView.contentInset = contentInsets;
+        self.tableView.scrollIndicatorInsets = scrollIndicatorInsets;
+    } completion:nil];
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    
+    
 }
 
 @end

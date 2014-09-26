@@ -12,9 +12,10 @@
 #import "BLCUser.h"
 #import "BLCDataSource.h"
 #import "BLCLikeButton.h"
+#import "BLCComposeCommentView.h"
 
 
-@interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate>
+ @interface BLCMediaTableViewCell () <UIGestureRecognizerDelegate, BLCComposeCommentViewDelegate>
 @property (nonatomic, strong) UIImageView *mediaImageView;
 @property (nonatomic, strong) UILabel *usernameAndCaptionLabel;
 @property (nonatomic, strong) UILabel *commentLabel;
@@ -31,6 +32,8 @@
 @property (nonatomic, strong) UILabel *likeLabel;
 
 @property (nonatomic, assign) NSInteger *countValue;
+
+@property (nonatomic, strong) BLCComposeCommentView *commentView;
 
 
 
@@ -96,27 +99,30 @@ static NSParagraphStyle *paragraphStyle;
         self.likeLabel = [[UILabel alloc] init];
         self.likeLabel.numberOfLines = 0;
         
+        self.commentView = [[BLCComposeCommentView alloc] init];
+        self.commentView.delegate = self;
+    
         
-        
-        
-        
-        
-        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton, self.likeLabel]) {
+        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton, self.likeLabel, self.commentView]) {
             [self.contentView addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _likeLabel);
+        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton, _likeLabel, _commentView);
 
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeLabel(==60)][_likeButton(==38)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDictionary]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentView]|" options:kNilOptions metrics:nil views:viewDictionary]];
         
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]"
-                                                                                 options:kNilOptions
-                                                                                 metrics:nil
-                                                                                   views:viewDictionary]];
+         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]"
+                                                                                  options:kNilOptions
+                                                                                  metrics:nil
+                                                                                    views:viewDictionary]];
+        
+        
+        
         
         self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView
                                                                   attribute:NSLayoutAttributeHeight
@@ -237,6 +243,7 @@ static NSParagraphStyle *paragraphStyle;
     self.commentLabel.attributedText = [self commentString];
     self.likeButton.likeButtonState = mediaItem.likeState;
     self.likeLabel.attributedText = [self likeString];
+    self.commentView.text = mediaItem.temporaryComment;
     
  }
 
@@ -252,7 +259,7 @@ static NSParagraphStyle *paragraphStyle;
     [layoutCell setNeedsLayout];
     [layoutCell layoutIfNeeded];
 
-    return CGRectGetMaxY(layoutCell.commentLabel.frame);
+    return CGRectGetMaxY(layoutCell.commentView.frame);
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
@@ -311,15 +318,25 @@ static NSParagraphStyle *paragraphStyle;
     } else if (self.mediaItem.likeState == BLCLikeStateUnliking){
         
         self.mediaItem.likeNumber --;
-        
     }
-    
-    
-    
-    
-    
-    
 }
 
+#pragma mark - BLCComposeCommentViewDelegate
+
+- (void) commentViewDidPressCommentButton:(BLCComposeCommentView *)sender {
+    [self.delegate cell:self didComposeComment:self.mediaItem.temporaryComment];
+}
+
+- (void) commentView:(BLCComposeCommentView *)sender textDidChange:(NSString *)text {
+    self.mediaItem.temporaryComment = text;
+}
+
+- (void) commentViewWillStartEditing:(BLCComposeCommentView *)sender {
+    [self.delegate cellWillStartComposingComment:self];
+}
+
+- (void) stopComposingComment {
+    [self.commentView stopComposingComment];
+}
 
 @end

@@ -14,6 +14,7 @@
 		1775D74719ADE9FF008FA60F /* BLCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1775D74619ADE9FF008FA60F /* BLCComment.m */; };
 		177D74A419AE78D4007131D5 /* BLCMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */; };
 		177D74A719B644FD007131D5 /* BLCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177D74A619B644FD007131D5 /* BLCLoginViewController.m */; };
+		178B0B5B19D211D800C2A592 /* BLCComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B5A19D211D800C2A592 /* BLCComposeCommentView.m */; };
 		17DC50BE19A7D44F00CE33FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BD19A7D44F00CE33FB /* Foundation.framework */; };
 		17DC50C019A7D44F00CE33FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BF19A7D44F00CE33FB /* CoreGraphics.framework */; };
 		17DC50C219A7D44F00CE33FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50C119A7D44F00CE33FB /* UIKit.framework */; };
@@ -67,6 +68,8 @@
 		177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaTableViewCell.m; sourceTree = "<group>"; };
 		177D74A519B644FD007131D5 /* BLCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLoginViewController.h; sourceTree = "<group>"; };
 		177D74A619B644FD007131D5 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
+		178B0B5919D211D800C2A592 /* BLCComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCComposeCommentView.h; sourceTree = "<group>"; };
+		178B0B5A19D211D800C2A592 /* BLCComposeCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCComposeCommentView.m; sourceTree = "<group>"; };
 		17CA49A6333E4F4D9E9C0789 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		17DC50BA19A7D44F00CE33FB /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DC50BD19A7D44F00CE33FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -178,6 +181,8 @@
 				17DC82D819C734B700DC41F4 /* BLCMediaFullScreenAnimator.m */,
 				177D74A219AE78D4007131D5 /* BLCMediaTableViewCell.h */,
 				177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */,
+				178B0B5919D211D800C2A592 /* BLCComposeCommentView.h */,
+				178B0B5A19D211D800C2A592 /* BLCComposeCommentView.m */,
 				17DC82D419C72CC700DC41F4 /* BLCMediaFullScreenViewController.h */,
 				17DC82D519C72CC700DC41F4 /* BLCMediaFullScreenViewController.m */,
 				1775D73C19ACEDC7008FA60F /* BLCUser.h */,
@@ -406,6 +411,7 @@
 				177D74A419AE78D4007131D5 /* BLCMediaTableViewCell.m in Sources */,
 				1775D74719ADE9FF008FA60F /* BLCComment.m in Sources */,
 				177D74A719B644FD007131D5 /* BLCLoginViewController.m in Sources */,
+				178B0B5B19D211D800C2A592 /* BLCComposeCommentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
