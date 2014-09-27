@@ -15,6 +15,9 @@
 		177D74A419AE78D4007131D5 /* BLCMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */; };
 		177D74A719B644FD007131D5 /* BLCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177D74A619B644FD007131D5 /* BLCLoginViewController.m */; };
 		178B0B5B19D211D800C2A592 /* BLCComposeCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B5A19D211D800C2A592 /* BLCComposeCommentView.m */; };
+		178B0B5E19D5DF2200C2A592 /* BLCCameraToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B5D19D5DF2200C2A592 /* BLCCameraToolbar.m */; };
+		178B0B6119D5FFB300C2A592 /* BLCCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B6019D5FFB300C2A592 /* BLCCameraViewController.m */; };
+		178B0B6419D60B7400C2A592 /* UIImage+BLCImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B6319D60B7400C2A592 /* UIImage+BLCImageUtilities.m */; };
 		17DC50BE19A7D44F00CE33FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BD19A7D44F00CE33FB /* Foundation.framework */; };
 		17DC50C019A7D44F00CE33FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BF19A7D44F00CE33FB /* CoreGraphics.framework */; };
 		17DC50C219A7D44F00CE33FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50C119A7D44F00CE33FB /* UIKit.framework */; };
@@ -70,6 +73,12 @@
 		177D74A619B644FD007131D5 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
 		178B0B5919D211D800C2A592 /* BLCComposeCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCComposeCommentView.h; sourceTree = "<group>"; };
 		178B0B5A19D211D800C2A592 /* BLCComposeCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCComposeCommentView.m; sourceTree = "<group>"; };
+		178B0B5C19D5DF2200C2A592 /* BLCCameraToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCCameraToolbar.h; sourceTree = "<group>"; };
+		178B0B5D19D5DF2200C2A592 /* BLCCameraToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCCameraToolbar.m; sourceTree = "<group>"; };
+		178B0B5F19D5FFB200C2A592 /* BLCCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCCameraViewController.h; sourceTree = "<group>"; };
+		178B0B6019D5FFB300C2A592 /* BLCCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCCameraViewController.m; sourceTree = "<group>"; };
+		178B0B6219D60B7400C2A592 /* UIImage+BLCImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BLCImageUtilities.h"; sourceTree = "<group>"; };
+		178B0B6319D60B7400C2A592 /* UIImage+BLCImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BLCImageUtilities.m"; sourceTree = "<group>"; };
 		17CA49A6333E4F4D9E9C0789 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		17DC50BA19A7D44F00CE33FB /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DC50BD19A7D44F00CE33FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -181,6 +190,12 @@
 				17DC82D819C734B700DC41F4 /* BLCMediaFullScreenAnimator.m */,
 				177D74A219AE78D4007131D5 /* BLCMediaTableViewCell.h */,
 				177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */,
+				178B0B5C19D5DF2200C2A592 /* BLCCameraToolbar.h */,
+				178B0B5D19D5DF2200C2A592 /* BLCCameraToolbar.m */,
+				178B0B5F19D5FFB200C2A592 /* BLCCameraViewController.h */,
+				178B0B6019D5FFB300C2A592 /* BLCCameraViewController.m */,
+				178B0B6219D60B7400C2A592 /* UIImage+BLCImageUtilities.h */,
+				178B0B6319D60B7400C2A592 /* UIImage+BLCImageUtilities.m */,
 				178B0B5919D211D800C2A592 /* BLCComposeCommentView.h */,
 				178B0B5A19D211D800C2A592 /* BLCComposeCommentView.m */,
 				17DC82D419C72CC700DC41F4 /* BLCMediaFullScreenViewController.h */,
@@ -403,6 +418,7 @@
 				17ED50DE19CDA32F001AAD80 /* BLCLikeButton.m in Sources */,
 				17DC50CE19A7D44F00CE33FB /* BLCAppDelegate.m in Sources */,
 				1775D74419ADE8DF008FA60F /* BLCDataSource.m in Sources */,
+				178B0B6419D60B7400C2A592 /* UIImage+BLCImageUtilities.m in Sources */,
 				17DC50CA19A7D44F00CE33FB /* main.m in Sources */,
 				17DC510319A7E5FF00CE33FB /* BLCImagesTableViewController.m in Sources */,
 				17ED50DB19CD9EA7001AAD80 /* BLCCircleSpinnerView.m in Sources */,
@@ -410,8 +426,10 @@
 				17DC82D619C72CC700DC41F4 /* BLCMediaFullScreenViewController.m in Sources */,
 				177D74A419AE78D4007131D5 /* BLCMediaTableViewCell.m in Sources */,
 				1775D74719ADE9FF008FA60F /* BLCComment.m in Sources */,
+				178B0B5E19D5DF2200C2A592 /* BLCCameraToolbar.m in Sources */,
 				177D74A719B644FD007131D5 /* BLCLoginViewController.m in Sources */,
 				178B0B5B19D211D800C2A592 /* BLCComposeCommentView.m in Sources */,
+				178B0B6119D5FFB300C2A592 /* BLCCameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
