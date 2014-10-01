@@ -10,4 +10,8 @@
 
 @interface BLCPostToInstagramCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, assign) CGFloat thumbnailSize;
+
 @end
