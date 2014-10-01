@@ -21,6 +21,8 @@
 		178B0B6719D81B2C00C2A592 /* BLCCropBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B6619D81B2C00C2A592 /* BLCCropBox.m */; };
 		178B0B6A19D81EB300C2A592 /* BLCCropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B6919D81EB300C2A592 /* BLCCropImageViewController.m */; };
 		178B0B6D19D824CA00C2A592 /* BLCImageLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B6C19D824CA00C2A592 /* BLCImageLibraryViewController.m */; };
+		178B0B7019D9FD9900C2A592 /* BLCPostToInstagramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B6F19D9FD9900C2A592 /* BLCPostToInstagramViewController.m */; };
+		178B0B7319DB16C600C2A592 /* BLCPostToInstagramCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 178B0B7219DB16C600C2A592 /* BLCPostToInstagramCollectionViewCell.m */; };
 		17DC50BE19A7D44F00CE33FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BD19A7D44F00CE33FB /* Foundation.framework */; };
 		17DC50C019A7D44F00CE33FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50BF19A7D44F00CE33FB /* CoreGraphics.framework */; };
 		17DC50C219A7D44F00CE33FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DC50C119A7D44F00CE33FB /* UIKit.framework */; };
@@ -88,6 +90,10 @@
 		178B0B6919D81EB300C2A592 /* BLCCropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLCCropImageViewController.m; path = ../BLCCropImageViewController.m; sourceTree = "<group>"; };
 		178B0B6B19D824CA00C2A592 /* BLCImageLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCImageLibraryViewController.h; sourceTree = "<group>"; };
 		178B0B6C19D824CA00C2A592 /* BLCImageLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCImageLibraryViewController.m; sourceTree = "<group>"; };
+		178B0B6E19D9FD9900C2A592 /* BLCPostToInstagramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCPostToInstagramViewController.h; sourceTree = "<group>"; };
+		178B0B6F19D9FD9900C2A592 /* BLCPostToInstagramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCPostToInstagramViewController.m; sourceTree = "<group>"; };
+		178B0B7119DB16C600C2A592 /* BLCPostToInstagramCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCPostToInstagramCollectionViewCell.h; sourceTree = "<group>"; };
+		178B0B7219DB16C600C2A592 /* BLCPostToInstagramCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCPostToInstagramCollectionViewCell.m; sourceTree = "<group>"; };
 		17CA49A6333E4F4D9E9C0789 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		17DC50BA19A7D44F00CE33FB /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DC50BD19A7D44F00CE33FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -199,10 +205,14 @@
 				178B0B6C19D824CA00C2A592 /* BLCImageLibraryViewController.m */,
 				17DC510119A7E5FF00CE33FB /* BLCImagesTableViewController.h */,
 				17DC510219A7E5FF00CE33FB /* BLCImagesTableViewController.m */,
+				178B0B6E19D9FD9900C2A592 /* BLCPostToInstagramViewController.h */,
+				178B0B6F19D9FD9900C2A592 /* BLCPostToInstagramViewController.m */,
 				17DC82D719C734B600DC41F4 /* BLCMediaFullScreenAnimator.h */,
 				17DC82D819C734B700DC41F4 /* BLCMediaFullScreenAnimator.m */,
 				177D74A219AE78D4007131D5 /* BLCMediaTableViewCell.h */,
 				177D74A319AE78D4007131D5 /* BLCMediaTableViewCell.m */,
+				178B0B7119DB16C600C2A592 /* BLCPostToInstagramCollectionViewCell.h */,
+				178B0B7219DB16C600C2A592 /* BLCPostToInstagramCollectionViewCell.m */,
 				178B0B5C19D5DF2200C2A592 /* BLCCameraToolbar.h */,
 				178B0B5D19D5DF2200C2A592 /* BLCCameraToolbar.m */,
 				178B0B5F19D5FFB200C2A592 /* BLCCameraViewController.h */,
@@ -225,14 +235,14 @@
 				1775D74319ADE8DF008FA60F /* BLCDataSource.m */,
 				177D74A519B644FD007131D5 /* BLCLoginViewController.h */,
 				177D74A619B644FD007131D5 /* BLCLoginViewController.m */,
-				17DC50CF19A7D44F00CE33FB /* Images.xcassets */,
 				17ED50D919CD9EA7001AAD80 /* BLCCircleSpinnerView.h */,
 				17ED50DA19CD9EA7001AAD80 /* BLCCircleSpinnerView.m */,
 				17ED50DC19CDA32F001AAD80 /* BLCLikeButton.h */,
 				17ED50DD19CDA32F001AAD80 /* BLCLikeButton.m */,
-				17DC50C419A7D44F00CE33FB /* Supporting Files */,
 				178B0B6519D81B2C00C2A592 /* BLCCropBox.h */,
 				178B0B6619D81B2C00C2A592 /* BLCCropBox.m */,
+				17DC50CF19A7D44F00CE33FB /* Images.xcassets */,
+				17DC50C419A7D44F00CE33FB /* Supporting Files */,
 			);
 			path = Blocstagram;
 			sourceTree = "<group>";
@@ -427,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				178B0B7019D9FD9900C2A592 /* BLCPostToInstagramViewController.m in Sources */,
 				17ED50E419D0AEFD001AAD80 /* BLCLikeCount.m in Sources */,
 				1775D73E19ACEDC7008FA60F /* BLCUser.m in Sources */,
 				17DC82D919C734B700DC41F4 /* BLCMediaFullScreenAnimator.m in Sources */,
@@ -448,6 +459,7 @@
 				177D74A719B644FD007131D5 /* BLCLoginViewController.m in Sources */,
 				178B0B5B19D211D800C2A592 /* BLCComposeCommentView.m in Sources */,
 				178B0B6119D5FFB300C2A592 /* BLCCameraViewController.m in Sources */,
+				178B0B7319DB16C600C2A592 /* BLCPostToInstagramCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
