@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		14A14444258E431B96F0C8A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24590379E2A347A8BA37CF57 /* libPods.a */; };
+		173936AF19E00E7C005336D9 /* BLCUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 173936AE19E00E7C005336D9 /* BLCUserTests.m */; };
+		173936B119E015F8005336D9 /* BLCComposeCommentViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 173936B019E015F8005336D9 /* BLCComposeCommentViewTests.m */; };
+		173936B319E0161B005336D9 /* BLCCommentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 173936B219E0161B005336D9 /* BLCCommentTests.m */; };
+		173936B519E01634005336D9 /* BLCMediaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 173936B419E01634005336D9 /* BLCMediaTests.m */; };
+		173936B719E01659005336D9 /* BLCMediaViewTableCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 173936B619E01659005336D9 /* BLCMediaViewTableCellTests.m */; };
 		1775D73E19ACEDC7008FA60F /* BLCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1775D73D19ACEDC7008FA60F /* BLCUser.m */; };
 		1775D74119ADE8C2008FA60F /* BLCMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 1775D74019ADE8C2008FA60F /* BLCMedia.m */; };
 		1775D74419ADE8DF008FA60F /* BLCDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1775D74319ADE8DF008FA60F /* BLCDataSource.m */; };
@@ -51,6 +56,7 @@
 		17ED50DB19CD9EA7001AAD80 /* BLCCircleSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17ED50DA19CD9EA7001AAD80 /* BLCCircleSpinnerView.m */; };
 		17ED50DE19CDA32F001AAD80 /* BLCLikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 17ED50DD19CDA32F001AAD80 /* BLCLikeButton.m */; };
 		17ED50E419D0AEFD001AAD80 /* BLCLikeCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 17ED50E319D0AEFD001AAD80 /* BLCLikeCount.m */; };
+		17F40C9A19E20C76003A0046 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17F40C9919E20C76003A0046 /* 1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +70,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		173936AE19E00E7C005336D9 /* BLCUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCUserTests.m; sourceTree = "<group>"; };
+		173936B019E015F8005336D9 /* BLCComposeCommentViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCComposeCommentViewTests.m; sourceTree = "<group>"; };
+		173936B219E0161B005336D9 /* BLCCommentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCCommentTests.m; sourceTree = "<group>"; };
+		173936B419E01634005336D9 /* BLCMediaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaTests.m; sourceTree = "<group>"; };
+		173936B619E01659005336D9 /* BLCMediaViewTableCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaViewTableCellTests.m; sourceTree = "<group>"; };
 		1775D73C19ACEDC7008FA60F /* BLCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCUser.h; sourceTree = "<group>"; };
 		1775D73D19ACEDC7008FA60F /* BLCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCUser.m; sourceTree = "<group>"; };
 		1775D73F19ADE8C2008FA60F /* BLCMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMedia.h; sourceTree = "<group>"; };
@@ -133,6 +144,7 @@
 		17ED50DD19CDA32F001AAD80 /* BLCLikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLikeButton.m; sourceTree = "<group>"; };
 		17ED50E219D0AEFD001AAD80 /* BLCLikeCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLikeCount.h; sourceTree = "<group>"; };
 		17ED50E319D0AEFD001AAD80 /* BLCLikeCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLikeCount.m; sourceTree = "<group>"; };
+		17F40C9919E20C76003A0046 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		24590379E2A347A8BA37CF57 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -263,6 +275,12 @@
 			children = (
 				17DC50E219A7D44F00CE33FB /* BlocstagramTests.m */,
 				17DC50DD19A7D44F00CE33FB /* Supporting Files */,
+				173936AE19E00E7C005336D9 /* BLCUserTests.m */,
+				17F40C9919E20C76003A0046 /* 1.jpg */,
+				173936B219E0161B005336D9 /* BLCCommentTests.m */,
+				173936B419E01634005336D9 /* BLCMediaTests.m */,
+				173936B619E01659005336D9 /* BLCMediaViewTableCellTests.m */,
+				173936B019E015F8005336D9 /* BLCComposeCommentViewTests.m */,
 			);
 			path = BlocstagramTests;
 			sourceTree = "<group>";
@@ -394,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17DC50E119A7D44F00CE33FB /* InfoPlist.strings in Resources */,
+				17F40C9A19E20C76003A0046 /* 1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +486,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				173936AF19E00E7C005336D9 /* BLCUserTests.m in Sources */,
+				173936B119E015F8005336D9 /* BLCComposeCommentViewTests.m in Sources */,
 				17DC50E319A7D44F00CE33FB /* BlocstagramTests.m in Sources */,
+				173936B319E0161B005336D9 /* BLCCommentTests.m in Sources */,
+				173936B719E01659005336D9 /* BLCMediaViewTableCellTests.m in Sources */,
+				173936B519E01634005336D9 /* BLCMediaTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

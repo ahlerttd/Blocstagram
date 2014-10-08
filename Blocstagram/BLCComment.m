@@ -9,6 +9,7 @@
 #import "BLCComment.h"
 #import "BLCUser.h"
 
+
 @implementation BLCComment
 
 - (instancetype) initWithDictionary:(NSDictionary *)commentDictionary {

@@ -134,7 +134,7 @@ static NSParagraphStyle *paragraphStyle;
     CGFloat usernameFontSize = 10;
     
     // Make a string that says "username caption text"
-    NSString *baseString = [NSString stringWithFormat:@"%li", self.mediaItem.likeNumber];
+    NSString *baseString = [NSString stringWithFormat:@"%li", (long)self.mediaItem.likeNumber];
     
     // Make an attributed string, with the "username" bold
     NSMutableAttributedString *mutableLikeString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : [lightFont fontWithSize:usernameFontSize], NSParagraphStyleAttributeName : paragraphStyle}];
